@@ -1,7 +1,7 @@
 {
   "name": "perplexity-code",
-  "version": "0.1.0",
-  "description": "AI-driven CLI code assistant compatible with Cursor and VSCode",
+  "version": "0.1.2",
+  "description": "AI-driven CLI code assistant powered by local LLMs like Ollama (Deepseek)",
   "main": "bin/pxc.js",
   "bin": {
     "perplexity-code": "./bin/pxc.js",
@@ -11,8 +11,7 @@
   "files": [
     "bin/",
     "src/",
-    "utils/",
-    "package.json"
+    "utils/"
   ],
   "scripts": {
     "start": "node ./bin/pxc.js",
@@ -23,7 +22,7 @@
     "cli",
     "ai",
     "code",
-    "perplexity",
+    "ollama",
     "developer-tools"
   ],
   "author": "holasoymalva",
@@ -31,7 +30,6 @@
   "dependencies": {
     "axios": "^1.6.7",
     "chalk": "^5.3.0",
-    "commander": "^11.1.0",
-    "dotenv": "^16.4.5"
+    "commander": "^11.1.0"
   }
 }

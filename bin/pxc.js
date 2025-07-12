@@ -12,7 +12,7 @@ import { refactor } from '../src/commands/refactor.js';
 dotenv.config();
 
 const program = new Command();
-program.name("pxc").description("Perplexity-powered CLI for coding tasks").version("0.1.0");
+program.name("pxc").description("Perplexity-powered CLI for coding tasks (via Ollama)").version("0.1.2");
 
 const readInput = async (input) => {
   if (input) return input;
@@ -37,10 +37,19 @@ program
       return;
     }
 
-    if (query?.startsWith('/debug')) debug(content);
-    else if (query?.startsWith('/convert')) convert(content);
-    else if (query?.startsWith('/refactor')) refactor(content);
-    else explain(content);
+    try {
+      if (query?.startsWith('/debug')) {
+        await debug(content);
+      } else if (query?.startsWith('/convert')) {
+        await convert(content);
+      } else if (query?.startsWith('/refactor')) {
+        await refactor(content);
+      } else {
+        await explain(content);
+      }
+    } catch (err) {
+      console.error(chalk.red(`❌ Error executing command: ${err.message}`));
+    }
   });
 
-program.parse(process.argv);
+program.parseAsync(process.argv);

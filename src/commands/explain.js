@@ -1,7 +1,15 @@
 import chalk from 'chalk';
+import { askLocalLLM } from '../../utils/ollama.js';
 
-export function explain(input) {
+export async function explain(input) {
   console.log(chalk.green.bold("\n[Explain Mode]\n"));
   console.log(chalk.cyan(input));
-  console.log(chalk.gray("\n🤖 AI: This is a placeholder explanation for your input."));
+
+  try {
+    const response = await askLocalLLM(`Explain this code in detail:
+\n${input}`);
+    console.log(chalk.gray(`\n🤖 ${response}\n`));
+  } catch (err) {
+    console.error(chalk.red(`\n❌ Error: ${err.message}`));
+  }
 }
